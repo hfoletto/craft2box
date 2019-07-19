@@ -96,8 +96,5 @@ pip install ansible==2.6
 # Disable MySQL 5.7.5+ ONLY_FULL_GROUP_BY
 mysql -uroot -proot -e "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));"
 
-# Clean WWW folder
-rm -r /var/www/*
-
 # Restart Apache
 service apache2 restart
