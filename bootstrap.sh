@@ -69,13 +69,6 @@ apt-get update
 apt-get install -y python2.7
 
 # Install nodejs v8.11.4 and gulp
-#wget https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.g‌​z
-#mkdir -p /opt/nodejs
-#tar -xvzf node-v8.11.4-linux-x64.tar.gz -C /opt/nodejs/
-#mv /opt/nodejs/node-v8.11.4-linux-x64 /opt/nodejs/8.11.4
-#ln -s /opt/nodejs/6.11.3 /opt/nodejs/current
-#ln -s /opt/nodejs/current/bin/node /bin/node
-#rm node-v8.11.4-linux-x64.tar.gz
 curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 bash nodesource_setup.sh
 apt-get install -y nodejs
