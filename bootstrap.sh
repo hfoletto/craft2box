@@ -19,6 +19,7 @@ apt-get update
 
 # Install PHP
 apt-get install -y php7.0
+apt-get install -y composer
 
 # PHP Apache Mod
 apt-get install -y libapache2-mod-php7.0
