@@ -3,7 +3,10 @@
 
 Vagrant.configure("2") do |config|
 
-	# Host name of the VM
+  #config.ssh.username = "vagrant"
+  #config.ssh.password = "vagrant"
+
+  # Host name of the VM
   config.vm.hostname = "craft.local"
   
   # Box Settings
@@ -19,9 +22,10 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.33.10"
   config.vm.network :forwarded_port, guest: 3000, host: 3000, auto_correct: true
   config.vm.network :forwarded_port, guest: 3001, host: 3001, auto_correct: true
+  config.vm.network :forwarded_port, guest: 3306, host: 3306, auto_correct: true
 
   # Folder Settings
-  config.vm.synced_folder "www", "/var/www", :nfs => { :mount_options => ["dmode=777", "fmode=666"] }
+  config.vm.synced_folder "./www", "/var/www", :nfs => { :mount_options => ["dmode=777", "fmode=666"] }
   
   config.vm.provision "shell", path: "bootstrap.sh"
   config.vm.provision "shell",
@@ -35,5 +39,15 @@ Vagrant.configure("2") do |config|
 	config.hostmanager.ignore_private_ip = false
 	config.hostmanager.include_offline = true
 	config.hostmanager.aliases = %w(craft.local)
+  end
+  
+  config.trigger.after :up do |trigger|
+	trigger.info = "Restoring database..."
+	trigger.run_remote = {path: "./resources/importdb.sh"}
+  end
+  
+  config.trigger.before :halt do |trigger|
+	trigger.info = "Dumping the database before shutting down..."
+	trigger.run_remote = {path: "./resources/exportdb.sh"}
   end
 end

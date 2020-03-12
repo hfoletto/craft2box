@@ -34,6 +34,7 @@ apt-get install -y php7.0-zip
 apt-get install -y php7.0-gd
 apt-get install -y php7.0-mcrypt
 apt-get install -y php7.0-curl
+apt-get install -y php7.0-xml
 apt-get install -y php-imagick
 
 # Set MySQL Pass
